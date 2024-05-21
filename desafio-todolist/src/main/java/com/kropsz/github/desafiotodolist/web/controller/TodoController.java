@@ -3,6 +3,7 @@ package com.kropsz.github.desafiotodolist.web.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,4 +42,10 @@ public class TodoController {
     public ResponseEntity<List<Todo>> update(@RequestBody TodoDTO todo, @PathVariable Long id) {
         return ResponseEntity.status(200).body(todoService.update(todo, id));
     }
+
+    @PutMapping("/{id}/done")
+    public ResponseEntity<List<Todo>> done(@PathVariable Long id) {
+        return ResponseEntity.status(200).body(todoService.done(id));
+    }
+
 }

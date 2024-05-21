@@ -46,6 +46,17 @@ public class TodoService {
 
     }
 
+    public List<Todo> done(Long id) {
+        todoRepository.findById(id).ifPresentOrElse((existingTodo) -> {
+            existingTodo.setFinalizado(true);
+            todoRepository.save(existingTodo);
+        }, () -> {
+            throw new BadRequestException("Todo %d não existe! ".formatted(id));
+        });
+
+        return findAll();
+    }
+
     public List<Todo> delete(Long id) {
         todoRepository.findById(id).ifPresentOrElse((existingTodo) -> todoRepository.delete(existingTodo), () -> {
           throw new BadRequestException("Todo %d não existe! ".formatted(id));
