@@ -9,14 +9,13 @@ import com.kropsz.github.desafiotodolist.entities.Todo;
 import com.kropsz.github.desafiotodolist.exceptions.BadRequestException;
 import com.kropsz.github.desafiotodolist.repository.TodoRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class TodoService {
 
-    private TodoRepository todoRepository;
-
-    public TodoService(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
-    }
+    private final TodoRepository todoRepository;
 
     public List<Todo> create(Todo todo) {
         todoRepository.save(todo);
