@@ -3,6 +3,7 @@ package com.kropsz.github.desafiotodolist.web.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,11 @@ public class TodoController {
 
     @PostMapping("/create")
     public ResponseEntity<List<Todo>> create(@RequestBody @Valid TodoDTO todo) {
-        return ResponseEntity.ok(todoService.create(todo));
+        return ResponseEntity.status(201).body(todoService.create(todo));
     }
 
+    @GetMapping
+    public List<Todo> list() {
+        return todoService.findAll();
+    }
 }
