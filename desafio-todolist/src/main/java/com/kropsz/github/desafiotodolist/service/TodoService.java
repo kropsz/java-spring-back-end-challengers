@@ -32,10 +32,12 @@ public class TodoService {
         return todoRepository.findAll(sort);
     }
 
-    public List<Todo> update(Todo todo, Long id) {
+    public List<Todo> update(TodoDTO todo, Long id) {
         todoRepository.findById(id).ifPresentOrElse((existingTodo) -> {
-            todo.setId(id);
-            todoRepository.save(todo);
+            existingTodo.setDescricao(todo.descricao());
+            existingTodo.setNome(todo.nome());
+            existingTodo.setPrioridade(todo.prioridade());
+            todoRepository.save(existingTodo);
         }, () -> {
             throw new BadRequestException("Todo %d não existe! ".formatted(id));
         });
