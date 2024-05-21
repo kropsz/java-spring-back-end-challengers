@@ -40,4 +40,11 @@ public class TodoService {
         return findAll();
 
     }
+
+    public List<Todo> delete(Long id) {
+        todoRepository.findById(id).ifPresentOrElse((existingTodo) -> todoRepository.delete(existingTodo), () -> {
+          throw new BadRequestException("Todo %d não existe! ".formatted(id));
+        });
+        return findAll();
+      }
 }
