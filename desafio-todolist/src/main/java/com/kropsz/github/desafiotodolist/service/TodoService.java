@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.kropsz.github.desafiotodolist.entities.Todo;
 import com.kropsz.github.desafiotodolist.exceptions.BadRequestException;
 import com.kropsz.github.desafiotodolist.repository.TodoRepository;
+import com.kropsz.github.desafiotodolist.service.util.BuilderTodo;
+import com.kropsz.github.desafiotodolist.web.TodoDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,8 +18,10 @@ import lombok.RequiredArgsConstructor;
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final BuilderTodo builder;
 
-    public List<Todo> create(Todo todo) {
+    public List<Todo> create(TodoDTO todoDto) {
+        var todo = builder.build(todoDto);
         todoRepository.save(todo);
         return findAll();
     }
