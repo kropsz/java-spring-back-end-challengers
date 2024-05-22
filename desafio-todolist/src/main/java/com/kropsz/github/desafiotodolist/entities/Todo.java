@@ -24,4 +24,14 @@ public class Todo {
     private boolean finalizado;
     private int prioridade;
     
+    public Todo(String nome, String descricao, boolean finalizado, int prioridade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.finalizado = finalizado;
+        this.prioridade = prioridade;
+    }
+
+    public boolean isFinalizado() {
+        return finalizado;
+      }
 }
